@@ -1,0 +1,44 @@
+
+#include <iostream>
+#include <unordered_set>
+using namespace std;
+
+struct ListNode {
+    int val;
+    ListNode* next;
+
+    ListNode(int x) {
+        val = x;
+        next = NULL;
+    }
+};
+
+int findDuplicate(ListNode* head) {
+    unordered_set<int> st;
+
+    ListNode* temp = head;
+
+    while (temp != NULL) {
+        if (st.find(temp->val) != st.end()) {
+            return temp->val;
+        }
+
+        st.insert(temp->val);
+        temp = temp->next;
+    }
+
+    return -1;
+}
+
+int main() {
+    ListNode* head = new ListNode(1);
+    head->next = new ListNode(2);
+    head->next->next = new ListNode(3);
+    head->next->next->next = new ListNode(2);
+    head->next->next->next->next = new ListNode(5);
+
+    cout << "Duplicate node value: "
+         << findDuplicate(head);
+
+    return 0;
+}
