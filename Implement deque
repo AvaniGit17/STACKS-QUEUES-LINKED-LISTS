@@ -1,0 +1,86 @@
+
+#include <iostream>
+using namespace std;
+
+#define SIZE 5
+
+int dq[SIZE];
+int front = -1, rear = -1;
+
+void insertFront(int x) {
+    if (front == 0) {
+        cout << "Insertion not possible\n";
+        return;
+    }
+    if (front == -1)
+        front = rear = 0;
+    else
+        front--;
+
+    dq[front] = x;
+}
+
+void insertRear(int x) {
+    if (rear == SIZE - 1) {
+        cout << "Deque is Full\n";
+        return;
+    }
+    if (front == -1)
+        front = rear = 0;
+    else
+        rear++;
+
+    dq[rear] = x;
+}
+
+void deleteFront() {
+    if (front == -1) {
+        cout << "Deque is Empty\n";
+        return;
+    }
+    cout << "Deleted: " << dq[front] << endl;
+
+    if (front == rear)
+        front = rear = -1;
+    else
+        front++;
+}
+
+void deleteRear() {
+    if (front == -1) {
+        cout << "Deque is Empty\n";
+        return;
+    }
+    cout << "Deleted: " << dq[rear] << endl;
+
+    if (front == rear)
+        front = rear = -1;
+    else
+        rear--;
+}
+
+void display() {
+    if (front == -1) {
+        cout << "Deque is Empty";
+        return;
+    }
+
+    for (int i = front; i <= rear; i++)
+        cout << dq[i] << " ";
+}
+
+int main() {
+    insertRear(10);
+    insertRear(20);
+    insertFront(5);
+
+    display();
+
+    cout << endl;
+    deleteFront();
+    deleteRear();
+
+    display();
+
+    return 0;
+}
